@@ -5,7 +5,7 @@ const router = expesss.Router();
 router.get('/ping', (_req, res) => {
   res
     .json({
-      message: 'pong',
+      message: 'ping',
     })
     .status(200);
 });
