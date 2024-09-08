@@ -1,4 +1,5 @@
 import expesss from 'express';
+import { client } from '../config/redis';
 
 const router = expesss.Router();
 
@@ -16,6 +17,30 @@ router.get('/', (_req, res) => {
       message: 'Welcome to Learn MongoDB',
     })
     .status(200);
+});
+
+router.get('/cache', async (_req, res) => {
+  try {
+    const cachedData = await client.get('data');
+
+    if (cachedData) {
+      return res.json({
+        message: 'Data dari cache',
+        data: JSON.parse(cachedData),
+      });
+    }
+
+    // Simulasi fetch data baru
+    const freshData = { name: 'el', age: 23, city: 'Tangerang' };
+    await client.set('data', JSON.stringify(freshData), { EX: 20 }); // Expire dalam 20 detik
+
+    res.json({
+      message: 'Data baru',
+      data: freshData,
+    });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 export default router;

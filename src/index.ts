@@ -2,9 +2,10 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
-import mongoose from 'mongoose';
 
 import baserouter from './routes';
+import { connectRedis } from './config/redis';
+import connectDB from './config/db';
 
 dotenv.config();
 
@@ -15,13 +16,10 @@ const PORT = process.env.PORT;
 const app = async () => {
   try {
     // connect to db
-    mongoose
-      .connect(process.env.MONGO_URI as string)
-      .then(() => console.log('Databse connection successful'))
-      .catch((error) => {
-        console.log('Database connection failed');
-        console.log(error);
-      });
+    connectDB();
+
+    // connect to redis
+    connectRedis();
 
     const corsOptions = {
       origin: ['*'],
