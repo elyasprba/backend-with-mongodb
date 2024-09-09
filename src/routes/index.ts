@@ -40,6 +40,7 @@ router.get('/cache', async (_req, res) => {
     });
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
+    console.log(error);
   }
 });
 
