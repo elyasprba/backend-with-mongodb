@@ -14,6 +14,7 @@ export default [
       '@typescript-eslint/no-explicit-any': 'warn',
       quotes: ['error', 'single'],
       semi: ['error', 'always'],
+      'no-useless-catch': 'off',
     },
   },
 ];

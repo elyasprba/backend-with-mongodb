@@ -1,6 +1,8 @@
 import expesss from 'express';
 import { client } from '../config/redis';
 
+import authRouter from './auth.route';
+
 const router = expesss.Router();
 
 router.get('/ping', (_req, res) => {
@@ -43,5 +45,7 @@ router.get('/cache', async (_req, res) => {
     console.log(error);
   }
 });
+
+router.use('/api/auth', authRouter);
 
 export default router;
