@@ -38,10 +38,11 @@ const app = async () => {
     server.use(baserouter);
 
     server.listen(PORT, () => {
+      // eslint-disable-next-line no-console
       console.log(`App listening on port ${PORT}`);
     });
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
