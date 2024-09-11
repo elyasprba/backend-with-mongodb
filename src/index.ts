@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
 
 import baserouter from './routes';
 import { connectRedis } from './config/redis';
@@ -30,6 +31,8 @@ const app = async () => {
     server.use(
       morgan(':method :url :status :res[content-length] - :response-time ms')
     );
+
+    server.use(cookieParser());
 
     server.use(cors(corsOptions));
     server.use(express.urlencoded({ extended: false }));
