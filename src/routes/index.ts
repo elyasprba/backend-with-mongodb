@@ -2,6 +2,7 @@ import expesss from 'express';
 import { client } from '../config/redis';
 
 import authRouter from './auth.route';
+import userRouter from './user.route';
 
 const router = expesss.Router();
 
@@ -47,5 +48,6 @@ router.get('/cache', async (_req, res) => {
 });
 
 router.use('/api/auth', authRouter);
+router.use('/api/user', userRouter);
 
 export default router;
