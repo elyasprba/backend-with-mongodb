@@ -5,7 +5,6 @@ import {
   logoutUserController,
 } from '../controllers/auth.controller';
 import { checkDuplicateUser } from '../middleware/checkDuplicateUser';
-import { checkToken } from '../middleware/access.token';
 import { userRegistrationSchema, validateData } from '../middleware/validate';
 
 const router = expesss.Router();
@@ -17,6 +16,6 @@ router.post(
   registerUserController
 );
 router.post('/login', loginUserController);
-router.post('/logout', checkToken, logoutUserController);
+router.post('/logout', logoutUserController);
 
 export default router;
