@@ -39,18 +39,22 @@ export const loginUserController = async (
 
     const user = await loginUserService(email);
 
-    if (!user) {
-      return errorResponse(res, 404, 'User not found');
-    }
+    if (!user) return errorResponse(res, 404, 'User not found');
 
     const isPasswordMatch = await bcrypt.compare(
       password,
       user.result.password
     );
 
-    if (!isPasswordMatch) {
-      return errorResponse(res, 400, 'Wrong password');
-    }
+    if (!isPasswordMatch) return errorResponse(res, 400, 'Wrong Password');
+
+    // if (user?.result.active !== 'active') {
+    //   return errorResponse(
+    //     res,
+    //     403,
+    //     'Pending Account. Please Verify Your Email'
+    //   );
+    // }
 
     res
       // .cookie('accessToken', user.accessToken, { httpOnly: true })
