@@ -4,6 +4,7 @@ import { IUserPayloadRegister } from '../types/user.types';
 import jwt from 'jsonwebtoken';
 
 import bcrypt from 'bcrypt';
+import { sendConfirmationEmail } from '../config/nodmailer';
 
 export const registerUserService = async (payload: IUserPayloadRegister) => {
   try {
@@ -18,6 +19,19 @@ export const registerUserService = async (payload: IUserPayloadRegister) => {
     };
 
     const result = await UserModel.create(body);
+
+    const payloadToken = {
+      id: result._id,
+      email: result.email,
+    };
+
+    const accessToken = jwt.sign(
+      payloadToken,
+      process.env.JWT_ACCESS_SECRET as string,
+      { expiresIn: process.env.JWT_ACCESS_EXPIRES_TIME }
+    );
+
+    await sendConfirmationEmail(username, email, accessToken);
 
     return result;
   } catch (error) {
