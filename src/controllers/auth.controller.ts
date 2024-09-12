@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import {
+  confirmUserService,
   loginUserService,
   logoutUserService,
   registerUserService,
@@ -7,6 +8,7 @@ import {
 import { errorResponse, successResponse } from '../middleware/response';
 
 import bcrypt from 'bcrypt';
+import { client } from '../config/redis';
 
 export const registerUserController = async (
   req: Request,
@@ -48,13 +50,13 @@ export const loginUserController = async (
 
     if (!isPasswordMatch) return errorResponse(res, 400, 'Wrong Password');
 
-    // if (user?.result.active !== 'active') {
-    //   return errorResponse(
-    //     res,
-    //     403,
-    //     'Pending Account. Please Verify Your Email'
-    //   );
-    // }
+    if (user?.result.active !== 'active') {
+      return errorResponse(
+        res,
+        403,
+        'Pending Account. Please Verify Your Email'
+      );
+    }
 
     res
       // .cookie('accessToken', user.accessToken, { httpOnly: true })
@@ -73,6 +75,27 @@ export const loginUserController = async (
       });
 
     next();
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const confirmUserController = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const cachedData = await client.get('confirmation_email');
+
+    if (cachedData) {
+      const parsedData = JSON.parse(cachedData);
+      const { email } = parsedData;
+
+      await confirmUserService(email);
+
+      successResponse(res, 200, 'Confirm Success');
+    }
   } catch (error) {
     return next(error);
   }
