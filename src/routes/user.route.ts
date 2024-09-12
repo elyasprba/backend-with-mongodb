@@ -8,6 +8,6 @@ import { checkToken } from '../middleware/access.token';
 const router = expesss.Router();
 
 router.get('/', checkToken, getUserController);
-router.get('/:id', getUsersByIdController);
+router.get('/:id', checkToken, getUsersByIdController);
 
 export default router;
