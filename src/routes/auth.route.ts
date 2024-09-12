@@ -18,4 +18,12 @@ router.post(
 router.post('/login', loginUserController);
 router.post('/logout', logoutUserController);
 
+router.get('/confirm/:token', (_req, res) => {
+  res
+    .json({
+      message: 'Success confirmation email',
+    })
+    .status(200);
+});
+
 export default router;
