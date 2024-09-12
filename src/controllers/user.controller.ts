@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getUsersService } from '../services/user.service';
+import { getUsersByIdService, getUsersService } from '../services/user.service';
 import { errorResponse } from '../middleware/response';
 import { client } from '../config/redis';
 
@@ -42,5 +42,24 @@ export const getUserController = async (req: Request, res: Response) => {
     });
   } catch (error) {
     errorResponse(res, 500, error);
+  }
+};
+
+export const getUsersByIdController = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const result = await getUsersByIdService(id);
+
+    res.status(200).json({
+      message: 'Get user success',
+      data: result,
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    const errorMessage =
+      error.message || error?.message?.message || 'An error occurred';
+    errorResponse(res, 404, errorMessage);
   }
 };
