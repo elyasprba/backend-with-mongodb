@@ -38,3 +38,12 @@ export const getUsersService = async (
     throw error;
   }
 };
+
+export const getUsersByIdService = async (id: string) => {
+  try {
+    const result = await UserModel.findById(id);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};

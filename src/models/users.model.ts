@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema(
     refresh_token: {
       type: String,
     },
+    active: {
+      type: String,
+      default: 'non-active',
+    },
   },
   { timestamps: true }
 );

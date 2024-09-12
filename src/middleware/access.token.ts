@@ -21,7 +21,6 @@ export const checkToken = async (
   } catch (error) {
     errorResponse(res, 401, 'Unauthorized');
     next(error);
-    return;
   }
   next();
 };

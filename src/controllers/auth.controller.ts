@@ -7,6 +7,7 @@ import {
 import { errorResponse, successResponse } from '../middleware/response';
 
 import bcrypt from 'bcrypt';
+import { sendConfirmationEmail } from '../config/nodmailer';
 
 export const registerUserController = async (
   req: Request,
@@ -16,11 +17,26 @@ export const registerUserController = async (
   try {
     const { body } = req;
 
+    // call service register user and create data to database
     const result = await registerUserService(body);
 
-    successResponse(res, 201, 'Register success', { id: result._id });
+    if (result && result.email) {
+      await sendConfirmationEmail(result.username, result.email);
+
+      return successResponse(
+        res,
+        201,
+        'Register Success, Please Check your email for verification'
+      );
+    }
+
+    return errorResponse(
+      res,
+      500,
+      'Registration succeeded but failed to send confirmation email'
+    );
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -65,7 +81,7 @@ export const loginUserController = async (
 
     next();
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -81,6 +97,6 @@ export const logoutUserController = async (
 
     successResponse(res, 200, 'Logout success');
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
