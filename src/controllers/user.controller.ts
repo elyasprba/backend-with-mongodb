@@ -1,5 +1,9 @@
-import { Request, Response } from 'express';
-import { getUsersByIdService, getUsersService } from '../services/user.service';
+import { NextFunction, Request, Response } from 'express';
+import {
+  getUsersByIdService,
+  getUsersService,
+  updateUserService,
+} from '../services/user.service';
 import { errorResponse } from '../middleware/response';
 import { client } from '../config/redis';
 
@@ -61,5 +65,24 @@ export const getUsersByIdController = async (req: Request, res: Response) => {
     const errorMessage =
       error.message || error?.message?.message || 'An error occurred';
     errorResponse(res, 404, errorMessage);
+  }
+};
+
+export const updateUserController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { username, role } = req.body;
+
+    const result = await updateUserService(req.params.id, { username, role });
+
+    res.status(201).json({
+      message: 'Update user success',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
   }
 };
