@@ -1,3 +1,4 @@
+import { IUserUpdate } from '../types/user.types';
 import { UserModel } from '../models/users.model';
 
 export const getUsersService = async (
@@ -42,6 +43,31 @@ export const getUsersService = async (
 export const getUsersByIdService = async (id: string) => {
   try {
     const result = await UserModel.findById(id);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getUserByEmail = async (email: string) => {
+  try {
+    const result = await UserModel.findOne({ email: email });
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateUserService = async (
+  id: string,
+  updateData: IUserUpdate
+) => {
+  try {
+    const result = await UserModel.findByIdAndUpdate(id, updateData, {
+      new: true,
+    }).select('-password -refresh_token -__v');
+
     return result;
   } catch (error) {
     throw error;

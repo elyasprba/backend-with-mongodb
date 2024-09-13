@@ -9,3 +9,8 @@ export interface IUserPayloadLogin {
   email: string;
   password: string;
 }
+
+export interface IUserUpdate {
+  username?: string;
+  role?: string;
+}

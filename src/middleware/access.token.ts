@@ -18,29 +18,24 @@ export const checkToken = async (
 
   const token = authorization.split(' ')[1];
 
-  jwt.verify(
-    token,
-    process.env.JWT_ACCESS_SECRET as string,
-    { issuer: process.env.JWT_ACCESS_SECRET },
-    (error) => {
-      // error handling
-      if (error) {
-        if (error.name === 'TokenExpiredErroror') {
-          return errorResponse(
-            res,
-            403,
-            'Your link expired, please register again.'
-          );
-        } else if (error.name === 'JsonWebTokenError') {
-          return errorResponse(res, 403, 'Invalid token');
-        } else {
-          return errorResponse(res, 403, 'Unauthorized');
-        }
+  jwt.verify(token, process.env.JWT_ACCESS_SECRET as string, (error) => {
+    // error handling
+    if (error) {
+      if (error.name === 'TokenExpiredErroror') {
+        return errorResponse(
+          res,
+          403,
+          'Your link expired, please register again.'
+        );
+      } else if (error.name === 'JsonWebTokenError') {
+        return errorResponse(res, 403, 'Invalid token');
+      } else {
+        return errorResponse(res, 403, 'Unauthorized');
       }
-
-      next();
     }
-  );
+
+    next();
+  });
 };
 
 export const checkTokenEmailConfirm = async (

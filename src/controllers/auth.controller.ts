@@ -9,6 +9,8 @@ import { errorResponse, successResponse } from '../middleware/response';
 
 import bcrypt from 'bcrypt';
 import { client } from '../config/redis';
+import { CACHE_KEY_CONFIRM_EMAIL } from '../constants/cache.key';
+import { getUserByEmail } from '../services/user.service';
 
 export const registerUserController = async (
   req: Request,
@@ -86,11 +88,19 @@ export const confirmUserController = async (
   next: NextFunction
 ) => {
   try {
-    const cachedData = await client.get('confirmation_email');
+    const cachedData = await client.get(CACHE_KEY_CONFIRM_EMAIL);
 
     if (cachedData) {
       const parsedData = JSON.parse(cachedData);
       const { email } = parsedData;
+
+      const result = await getUserByEmail(email);
+
+      if (result?.active === 'active') {
+        await client.del(CACHE_KEY_CONFIRM_EMAIL);
+        errorResponse(res, 403, 'User already active');
+        return;
+      }
 
       await confirmUserService(email);
 
