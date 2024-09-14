@@ -2,9 +2,6 @@
 
 This is an example authentication and authorization of a backend project with Express and Mongodb
 
-## Deploy
-Link deploy : https://backend-mongodb-app.vercel.app/
-
 
 ## ⛏️  Tech Stack
 
@@ -185,6 +182,8 @@ Start the server
 
 
 ## 📄 Documentation
+
+[Link Deploy to Vercel](https://backend-mongodb-app.vercel.app/)
 
 [Documentation Postman](https://documenter.getpostman.com/view/20120165/2sA3sAh7wM)
 
