@@ -2,6 +2,10 @@
 
 This is an example authentication and authorization of a backend project with Express and Mongodb
 
+## Deploy
+Link deploy : https://backend-mongodb-app.vercel.app/
+
+
 ## ⛏️  Tech Stack
 
 **Server:** express, mongodb, redis, nodemailer, zod, jsonwebtoken, bcrypt
