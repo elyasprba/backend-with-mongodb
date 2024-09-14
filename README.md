@@ -158,6 +158,28 @@ Start the server
     }
 ```
 
+#### Logout
+
+```http
+ POST /api/auth/logout
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| body	 | `object` | Required. JSON object with the following field: |
+| token	 | `string` | Required. The token to be invalidated. |
+
+- `Description`: Logs out a user by invalidating the provided authentication token.
+
+#### Response :
+
+```
+    {
+        "message": "Logout success"
+    }
+```
+
+
 ## 📄 Documentation
 
 [Documentation Postman](https://documenter.getpostman.com/view/20120165/2sA3sAh7wM)
