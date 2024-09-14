@@ -18,12 +18,12 @@ const PORT = process.env.PORT;
 const app = async () => {
   try {
     // connect to db
-    connectDB();
+    await connectDB();
 
     // connect to redis
-    connectRedis();
+    await connectRedis();
 
-    // cron job
+    // cron job run when server local running
     cronSchedule();
 
     const corsOptions = {
