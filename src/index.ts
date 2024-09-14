@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser';
 import baserouter from './routes';
 import { connectRedis } from './config/redis';
 import connectDB from './config/db';
+import { cronSchedule } from './middleware/cron.schedule';
 
 dotenv.config();
 
@@ -21,6 +22,9 @@ const app = async () => {
 
     // connect to redis
     connectRedis();
+
+    // cron job
+    cronSchedule();
 
     const corsOptions = {
       origin: ['*'],
