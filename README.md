@@ -1,4 +1,4 @@
-# 📌  Example authentication and authorization backend
+# Example authentication and authorization backend
 
 This is an example authentication and authorization of a backend project with Express and Mongodb
 
