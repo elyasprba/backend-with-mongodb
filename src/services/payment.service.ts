@@ -17,7 +17,7 @@ export const createPaymentService = async (payment: IPaymentPayload) => {
         phone: payment.phone_number,
       },
       callbacks: {
-        finish: `${process.env.CLIENT_URL}/product/payment/status`,
+        finish: `${process.env.CLIENT_URL}/payment/status`,
       },
       credit_card: {
         secure: true,
