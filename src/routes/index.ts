@@ -11,6 +11,6 @@ router.use(publicRouter);
 
 router.use('/api/auth', authRouter);
 router.use('/api/user', userRouter);
-router.use('/api/product', paymentRouter);
+router.use('/api/payment', paymentRouter);
 
 export default router;

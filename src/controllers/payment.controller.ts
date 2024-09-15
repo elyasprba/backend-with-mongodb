@@ -17,10 +17,10 @@ export const createPaymentController = async (
     const price = parseInt(amount);
 
     const result = await createPaymentService({
-      username: username ? username : 'anonymous',
-      email: email ? email : 'anonymous@gmail.com',
-      phone_number: phone_number ? phone_number : '08123456789',
-      amount: price ? price : 10000,
+      username,
+      email,
+      phone_number,
+      amount: price,
     });
 
     return res.status(201).json({
