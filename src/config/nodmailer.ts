@@ -27,7 +27,7 @@ export const sendConfirmationEmail = async (
             <p>Thank you for registering with Learning Mongoose!</p>
             <p>Please confirm your email address by clicking on the link below:</p>
             <br/>
-            <a href="${process.env.CLIENT_URL}/confirm/${token}" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #fff; background-color: #007bff; text-decoration: none; border-radius: 5px;">Confirm Your Email</a>
+            <a href="${process.env.CLIENT_URL}/auth/confirm/${token}" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #fff; background-color: #007bff; text-decoration: none; border-radius: 5px;">Confirm Your Email</a>
             <br/>
             <br/>
             <p>If you did not register for this account, please ignore this email.</p>

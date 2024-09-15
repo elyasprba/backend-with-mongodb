@@ -2,8 +2,7 @@
 
 This is an example authentication and authorization of a backend project with Express and Mongodb
 
-
-## ⛏️  Tech Stack
+## ⛏️ Tech Stack
 
 **Server:** express, mongodb, redis, nodemailer, zod, jsonwebtoken, bcrypt
 
@@ -34,6 +33,9 @@ OAUTH_EMAIL = ""
 OAUTH_CLIENTID = ""
 OAUTH_CLIENT_SECRET = ""
 OAUTH_REFRESH_TOKEN = ""
+
+YOUR_MIDTRANS_CLIENT_KEY = ""
+YOUR_MIDTRANS_SERVER_KEY = ""
 ```
 
 ## 📍 Run Locally
@@ -165,10 +167,10 @@ Start the server
  POST /api/auth/logout
 ```
 
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| body	 | `object` | Required. JSON object with the following field: |
-| token	 | `string` | Required. The token to be invalidated. |
+| Parameter | Type     | Description                                     |
+| :-------- | :------- | :---------------------------------------------- |
+| body      | `object` | Required. JSON object with the following field: |
+| token     | `string` | Required. The token to be invalidated.          |
 
 - `Description`: Logs out a user by invalidating the provided authentication token.
 
@@ -179,7 +181,6 @@ Start the server
         "message": "Logout success"
     }
 ```
-
 
 ## 📄 Documentation
 
