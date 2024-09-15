@@ -1,53 +1,16 @@
 import expesss from 'express';
-import { client } from '../config/redis';
 
 import authRouter from './auth.route';
 import userRouter from './user.route';
+import paymentRouter from './payment.route';
+import publicRouter from './public.route';
 
 const router = expesss.Router();
 
-router.get('/ping', (_req, res) => {
-  res
-    .json({
-      message: 'pong',
-    })
-    .status(200);
-});
-
-router.get('/', (_req, res) => {
-  res
-    .json({
-      message: 'Welcome to Learn MongoDB',
-    })
-    .status(200);
-});
-
-router.get('/cache', async (_req, res) => {
-  try {
-    const cachedData = await client.get('data');
-
-    if (cachedData) {
-      return res.json({
-        message: 'Data dari cache',
-        data: JSON.parse(cachedData),
-      });
-    }
-
-    // Simulasi fetch data baru
-    const freshData = { name: 'el', age: 23, city: 'Tangerang' };
-    await client.set('data', JSON.stringify(freshData), { EX: 20 }); // Expire dalam 20 detik
-
-    res.json({
-      message: 'Data baru',
-      data: freshData,
-    });
-  } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
-    throw error;
-  }
-});
+router.use(publicRouter);
 
 router.use('/api/auth', authRouter);
 router.use('/api/user', userRouter);
+router.use('/api/product', paymentRouter);
 
 export default router;

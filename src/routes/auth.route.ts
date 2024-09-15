@@ -1,4 +1,4 @@
-import expesss from 'express';
+import express from 'express';
 import {
   loginUserController,
   registerUserController,
@@ -9,7 +9,7 @@ import { checkDuplicateUser } from '../middleware/checkDuplicateUser';
 import { userRegistrationSchema, validateData } from '../middleware/validate';
 import { checkTokenEmailConfirm } from '../middleware/access.token';
 
-const router = expesss.Router();
+const router = express.Router();
 
 router.post(
   '/register',
