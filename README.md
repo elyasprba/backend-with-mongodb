@@ -1,4 +1,4 @@
-# Example authentication and authorization backend
+<h1 align="center">Example backend with mongodb</h1>
 
 This is an example authentication and authorization of a backend project with Express and Mongodb
 
