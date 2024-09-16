@@ -46,50 +46,10 @@ export const getPaymentStatusController = async (
 
     const transaction = await getPaymentStatusService(order_id as string);
 
-    switch (transaction.transaction_status) {
-      case 'pending':
-        return res.status(200).json({
-          message: 'Transaction is still pending',
-          data: {
-            order_id: transaction.order_id,
-            transaction_status: transaction.transaction_status,
-            transaction_time: transaction.transaction_time,
-          },
-        });
-
-      case 'settlement':
-        return res.status(200).json({
-          message: 'Transaction completed successfully',
-          data: {
-            status: transaction.status_code,
-            transaction_id: transaction.transaction_id,
-            amount: transaction.gross_amount,
-            order_id: transaction.order_id,
-            payment_type: transaction.payment_type,
-            transaction_status: transaction.transaction_status,
-            fraud_status: transaction.fraud_status,
-            status_message: transaction.status_message,
-            transaction_time: transaction.transaction_time,
-          },
-        });
-
-      case 'failed':
-        return res.status(200).json({
-          message: 'Transaction failed',
-          data: {
-            status: transaction.status_code,
-            transaction_id: transaction.transaction_id,
-            order_id: transaction.order_id,
-            transaction_status: transaction.transaction_status,
-            transaction_time: transaction.transaction_time,
-          },
-        });
-
-      default:
-        return res.status(200).json({
-          message: 'Transaction status is unknown',
-        });
-    }
+    return res.status(200).json({
+      message: 'Transaction success',
+      transaction,
+    });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     if (error instanceof midtransClient.MidtransError) {
