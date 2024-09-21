@@ -28,3 +28,13 @@ export const createProductService = async (
     throw error;
   }
 };
+
+export const getAllProductService = async () => {
+  try {
+    const result = await ProductModel.find();
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
