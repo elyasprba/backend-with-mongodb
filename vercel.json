@@ -12,5 +12,5 @@
       "dest": "src/index.ts"
     }
   ],
-  "buildCommand": "npm install --force && npm run build"
+  "buildCommand": "npm install --legacy-peer-deps && npm run build"
 }
