@@ -39,8 +39,8 @@ const app = async () => {
     server.use(cookieParser());
 
     server.use(cors(corsOptions));
-    server.use(express.urlencoded({ extended: false }));
     server.use(express.json());
+    server.use(express.urlencoded({ extended: true }));
 
     server.use(baserouter);
 
