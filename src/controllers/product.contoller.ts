@@ -1,6 +1,6 @@
-import { NextFunction, Request, Response } from 'express';
-import { createProductService } from '../services/product.service';
+import { Request, NextFunction, Response } from 'express';
 import { errorResponse, successResponse } from '../middleware/response';
+import { createProductService } from '../services/product.service';
 
 export const createProductContoller = async (
   req: Request,
@@ -8,16 +8,14 @@ export const createProductContoller = async (
   next: NextFunction
 ) => {
   try {
-    const { name, price, stock, description, image, user_id } = req.body;
+    const { file = null } = req;
 
-    const result = await createProductService({
-      name,
-      price,
-      stock,
-      description,
-      image,
-      user_id,
-    });
+    if (!file) {
+      errorResponse(res, 400, 'image not found');
+      return;
+    }
+
+    const result = await createProductService(req.body, file);
 
     successResponse(res, 201, 'Product created successfully', result);
   } catch (error) {

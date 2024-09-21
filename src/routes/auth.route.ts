@@ -6,8 +6,9 @@ import {
   confirmUserController,
 } from '../controllers/auth.controller';
 import { checkDuplicateUser } from '../middleware/checkDuplicateUser';
-import { userRegistrationSchema, validateData } from '../middleware/validate';
+import { validateData } from '../validation/validate';
 import { checkTokenEmailConfirm } from '../middleware/access.token';
+import { userRegistrationSchema } from '../validation/register.schema';
 
 const router = express.Router();
 

@@ -3,6 +3,5 @@ export interface IProductPayload {
   price: number;
   stock: number;
   description: string;
-  image: string;
   user_id: string;
 }
