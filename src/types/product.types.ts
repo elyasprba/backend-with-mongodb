@@ -4,4 +4,5 @@ export interface IProductPayload {
   stock: number;
   description: string;
   user_id: string;
+  category: string;
 }
