@@ -8,7 +8,7 @@ const cloudinaryStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: async () => {
     return {
-      folder: 'backend_prisma',
+      folder: 'learn-mongo',
     };
   },
 });
