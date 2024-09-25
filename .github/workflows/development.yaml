@@ -1,4 +1,4 @@
-name: CI/CD Pipeline Learn MongoDB
+name: CI/CD Pipeline Learn MongoDB (Development)
 
 on:
   push:
