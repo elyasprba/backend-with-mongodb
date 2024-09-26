@@ -18,6 +18,7 @@ const PORT = process.env.PORT;
 const app = async () => {
   try {
     // connect to db
+    // test push
     await connectDB();
 
     // connect to redis
