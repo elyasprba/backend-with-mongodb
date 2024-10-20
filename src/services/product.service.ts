@@ -61,3 +61,12 @@ export const getAllProductService = async (
     throw error;
   }
 };
+
+export const getProductByIdService = async (id: string) => {
+  try {
+    const result = await ProductModel.findById(id);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
