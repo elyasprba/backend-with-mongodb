@@ -68,6 +68,11 @@ Start the server
   npm run start
 ```
 
+Start Docker Compoes 
+```bash
+  docker-compose up
+```
+
 ## 🖇 API Reference
 
 #### Welcome Endpoint
