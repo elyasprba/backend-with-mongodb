@@ -8,13 +8,24 @@ services:
     depends_on:
       - mongodb
       - redis
+    env_file:
+      - .env
 
   mongodb:
     image: mongo
     ports:
       - '27017:27017'
+    env_file:
+      - .env
+    volumes:
+      - mongodb-data:/data/db
 
   redis:
     image: redis
     ports:
       - '6379:6379'
+    env_file:
+      - .env
+
+volumes:
+  mongodb-data:

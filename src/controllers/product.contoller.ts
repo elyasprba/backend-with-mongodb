@@ -3,6 +3,7 @@ import { errorResponse, successResponse } from '../middleware/response';
 import {
   createProductService,
   getAllProductService,
+  getProductByIdService,
 } from '../services/product.service';
 import { client } from '../config/redis';
 
@@ -81,6 +82,23 @@ export const getAllProductController = async (
     });
   } catch (error) {
     res.status(500).json({ message: 'Internal Service Error' });
+    next(error);
+  }
+};
+
+export const getProductByIdController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { id } = req.params;
+
+    const result = await getProductByIdService(id);
+
+    successResponse(res, 200, 'Get product success', result);
+  } catch (error) {
+    errorResponse(res, 500, 'Internal Service Error');
     next(error);
   }
 };
